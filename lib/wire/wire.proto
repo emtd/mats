@@ -78,6 +78,14 @@ enum MessageType {
   FileSystemGetMessage       = 82;
   ConnectStartedMessage      = 92;
   ConnectStoppedMessage      = 93;
+
+  PerformanceEntryMessage=201;
+}
+
+message PerformanceEntryMessage{
+  required string serial=1;
+  optional string data=2;
+  optional string package = 3;
 }
 
 message ConnectStartedMessage {
@@ -392,6 +400,9 @@ message LogcatFilter {
 
 message LogcatStartMessage {
   repeated LogcatFilter filters = 1;
+  required string datePath=2;
+  required string logName=3;
+  required string performanceName=4;
 }
 
 message LogcatStopMessage {
