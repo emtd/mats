@@ -246,6 +246,12 @@ module.exports = function ControlServiceFactory(
         dir: dir
       })
     }
+    
+    this.resScreen = function(flag){
+      return sendOneWay('screen.response',{
+          sync:flag
+      })
+    }
 
     this.checkAccount = function(type, account) {
       return sendTwoWay('account.check', {

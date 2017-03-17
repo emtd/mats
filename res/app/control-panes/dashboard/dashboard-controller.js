@@ -5,4 +5,8 @@ module.exports = function DashboardCtrl($scope) {
     $scope.control.fspull('/data/local/tmp');
     console.log('dashboard-----------')
   }
+  $scope.resScreen = function(flag){
+    console.log(flag)
+    $scope.control.resScreen(flag);
+  }
 }

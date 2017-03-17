@@ -81,6 +81,17 @@ enum MessageType {
 
   PerformanceEntryMessage=201;
   FileSystemPullMessage=202;
+  ScreenResponseMessage=203;
+  ScriptAutoEndMessage=204;
+}
+
+message ScriptAutoEndMessage{
+  required string serial = 1;
+  optional bool success=2;
+}
+
+message ScreenResponseMessage{
+  required bool sync=1;
 }
 
 message PerformanceEntryMessage{
