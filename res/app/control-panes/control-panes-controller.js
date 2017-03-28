@@ -38,11 +38,18 @@ module.exports =
 
     $scope.topTabs = [
       {
+        title: gettext('Test'),
+        icon: 'fa-eye color-green',
+        templateUrl: 'control-panes/test/test.pug',
+        filters: ['native', 'web']
+      },
+      {
         title: gettext('Dashboard'),
         icon: 'fa-dashboard fa-fw color-pink',
         templateUrl: 'control-panes/dashboard/dashboard.pug',
         filters: ['native', 'web']
       }
+
     ].concat(angular.copy(sharedTabs))
 
     $scope.belowTabs = [

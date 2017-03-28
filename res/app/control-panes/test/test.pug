@@ -1,0 +1,9 @@
+.row(ng-controller='testCtrl')
+  .col-md-12
+    button(ng-click='fspull()').btn.btn-sm.btn-success 推文件
+  .col-md-12
+    button(ng-click='resScreen(true)').btn.btn-sm.btn-warning 响应屏幕操作
+    button(ng-click='resScreen(false)').btn.btn-sm.btn-danger 不响应屏幕操作
+  .col-md-12
+    .btn.btn-warning(ng-click='getFile()') 获取文件信息
+    img(ng-src='{{testImg}}' style="width:150px;height:150px")

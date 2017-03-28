@@ -83,6 +83,10 @@ enum MessageType {
   FileSystemPullMessage=202;
   ScreenResponseMessage=203;
   ScriptAutoEndMessage=204;
+  DeviceAppUIGetMessage=205;
+}
+
+message DeviceAppUIGetMessage{
 }
 
 message ScriptAutoEndMessage{

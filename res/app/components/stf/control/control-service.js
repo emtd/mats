@@ -246,6 +246,10 @@ module.exports = function ControlServiceFactory(
         dir: dir
       })
     }
+
+    this.getAppUI = function(){
+      return sendTwoWay('fs.appui')
+    }
     
     this.resScreen = function(flag){
       return sendOneWay('screen.response',{
