@@ -105,6 +105,7 @@ message PerformanceEntryMessage{
 }
 message FileSystemPullMessage{
   required string dir=1;
+  required string timeDir=2;
 }
 
 message ConnectStartedMessage {
