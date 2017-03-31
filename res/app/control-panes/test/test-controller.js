@@ -3,6 +3,7 @@ module.exports = function testCtrl($scope) {
   $scope.getFile = function (){
     $scope.control.getAppUI().then(function(data){
       console.log(data)
+      $scope.testImg='data:image/png;base64,'+data.body.img;
     })
     /*$http.get(url)
       .then(function(data){
