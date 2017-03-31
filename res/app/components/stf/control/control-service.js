@@ -241,9 +241,10 @@ module.exports = function ControlServiceFactory(
       })
     }
 
-    this.fspull = function(dir) {
+    this.fspull = function(dir,timeDir) {
       return sendTwoWay('fs.pull', {
-        dir: dir
+        dir: dir,
+        timeDir:timeDir
       })
     }
 

@@ -21,7 +21,7 @@ module.exports = function testCtrl($scope) {
 
   $scope.fspull = function (){
     debugger
-    $scope.control.fspull('/data/local/tmp');
+    $scope.control.fspull('/data/local/tmp','150508');
   }
   $scope.resScreen = function(flag){
     console.log(flag)
