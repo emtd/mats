@@ -6,4 +6,6 @@
     button(ng-click='resScreen(false)').btn.btn-sm.btn-danger 不响应屏幕操作
   .col-md-12
     .btn.btn-warning(ng-click='getFile()') 获取文件信息
-    img(ng-src='{{testImg}}' style="width:150px;height:150px")
+    img(id='crop')
+  .col-md-12
+    .btn.btn-warning(ng-click='scriptDebug()') debug

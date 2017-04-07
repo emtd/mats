@@ -109,11 +109,15 @@ module.exports = function DeviceListCtrl(
     }
   , {
       name: 'notes'
-    , selected: true
+    , selected: false
     }
   , {
       name: 'owner'
     , selected: true
+    }
+  , {
+      name:'token'
+      ,selected:true
     }
   ]
 

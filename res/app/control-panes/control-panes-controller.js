@@ -72,6 +72,7 @@ module.exports =
         })
         .then(function(device) {
           $scope.device = device
+          $scope.$broadcast('msgWS',{});
           $scope.control = ControlService.create(device, device.channel)
 
           // TODO: Change title, flickers too much on Chrome

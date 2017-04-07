@@ -84,6 +84,11 @@ enum MessageType {
   ScreenResponseMessage=203;
   ScriptAutoEndMessage=204;
   DeviceAppUIGetMessage=205;
+  ScriptDebugMessage=206;
+}
+
+message ScriptDebugMessage{
+  required string user = 1;
 }
 
 message DeviceAppUIGetMessage{
@@ -254,6 +259,7 @@ message DeviceIdentityMessage {
   required DeviceDisplayMessage display = 9;
   required DevicePhoneMessage phone = 11;
   optional string product = 12;
+  required string msgWSUrl=13;
 }
 
 message DeviceProperty {

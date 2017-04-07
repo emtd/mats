@@ -258,6 +258,12 @@ module.exports = function ControlServiceFactory(
       })
     }
 
+    this.scriptDebug = function(userId){
+      return sendTwoWay('script.debug',{
+        user:userId
+      })
+    }
+
     this.checkAccount = function(type, account) {
       return sendTwoWay('account.check', {
         type: type

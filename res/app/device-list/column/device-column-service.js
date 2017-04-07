@@ -23,40 +23,40 @@ module.exports = function DeviceColumnService($filter, gettext) {
   return {
     state: DeviceStatusCell({
       title: gettext('Status')
-    , value: function(device) {
+      , value: function (device) {
         return $filter('translate')(device.enhancedStateAction)
       }
     })
-  , model: DeviceModelCell({
+    , model: DeviceModelCell({
       title: gettext('Model')
-    , value: function(device) {
+      , value: function (device) {
         return device.model || device.serial
       }
     })
-  , name: DeviceNameCell({
+    , name: DeviceNameCell({
       title: gettext('Product')
-    , value: function(device) {
+      , value: function (device) {
         return device.name || device.model || device.serial
       }
     })
-  , operator: TextCell({
+    , operator: TextCell({
       title: gettext('Carrier')
-    , value: function(device) {
+      , value: function (device) {
         return device.operator || ''
       }
     })
-  , releasedAt: DateCell({
+    , releasedAt: DateCell({
       title: gettext('Released')
-    , value: function(device) {
+      , value: function (device) {
         return device.releasedAt ? new Date(device.releasedAt) : null
       }
     })
-  , version: TextCell({
+    , version: TextCell({
       title: gettext('OS')
-    , value: function(device) {
+      , value: function (device) {
         return device.version || ''
       }
-    , compare: function(deviceA, deviceB) {
+      , compare: function (deviceA, deviceB) {
         var va = (deviceA.version || '0').split('.')
         var vb = (deviceB.version || '0').split('.')
         var la = va.length
@@ -80,7 +80,7 @@ module.exports = function DeviceColumnService($filter, gettext) {
 
         return 0
       }
-    , filter: function(device, filter) {
+      , filter: function (device, filter) {
         var va = (device.version || '0').split('.')
         var vb = (filter.query || '0').split('.')
         var la = va.length
@@ -125,21 +125,21 @@ module.exports = function DeviceColumnService($filter, gettext) {
         return true
       }
     })
-  , network: TextCell({
+    , network: TextCell({
       title: gettext('Network')
-    , value: function(device) {
+      , value: function (device) {
         return device.phone ? device.phone.network : ''
       }
     })
-  , display: TextCell({
+    , display: TextCell({
       title: gettext('Screen')
-    , defaultOrder: 'desc'
-    , value: function(device) {
+      , defaultOrder: 'desc'
+      , value: function (device) {
         return device.display && device.display.width
           ? device.display.width + 'x' + device.display.height
           : ''
       }
-    , compare: function(deviceA, deviceB) {
+      , compare: function (deviceA, deviceB) {
         var va = deviceA.display && deviceA.display.width
           ? deviceA.display.width * deviceA.display.height
           : 0
@@ -149,128 +149,134 @@ module.exports = function DeviceColumnService($filter, gettext) {
         return va - vb
       }
     })
-  , browser: DeviceBrowserCell({
+    , browser: DeviceBrowserCell({
       title: gettext('Browser')
-    , value: function(device) {
+      , value: function (device) {
         return device.browser || {apps: []}
       }
     })
-  , serial: TextCell({
+    , serial: TextCell({
       title: gettext('Serial')
-    , value: function(device) {
+      , value: function (device) {
         return device.serial || ''
       }
     })
-  , manufacturer: TextCell({
+    , manufacturer: TextCell({
       title: gettext('Manufacturer')
-    , value: function(device) {
+      , value: function (device) {
         return device.manufacturer || ''
       }
     })
-  , sdk: NumberCell({
+    , sdk: NumberCell({
       title: gettext('SDK')
-    , defaultOrder: 'desc'
-    , value: function(device) {
+      , defaultOrder: 'desc'
+      , value: function (device) {
         return device.sdk || ''
       }
     })
-  , abi: TextCell({
+    , abi: TextCell({
       title: gettext('ABI')
-    , value: function(device) {
+      , value: function (device) {
         return device.abi || ''
       }
     })
-  , phone: TextCell({
+    , phone: TextCell({
       title: gettext('Phone')
-    , value: function(device) {
+      , value: function (device) {
         return device.phone ? device.phone.phoneNumber : ''
       }
     })
-  , imei: TextCell({
+    , imei: TextCell({
       title: gettext('Phone IMEI')
-    , value: function(device) {
+      , value: function (device) {
         return device.phone ? device.phone.imei : ''
       }
     })
-  , imsi: TextCell({
+    , imsi: TextCell({
       title: gettext('Phone IMSI')
-    , value: function(device) {
+      , value: function (device) {
         return device.phone ? device.phone.imsi : ''
       }
     })
-  , iccid: TextCell({
+    , iccid: TextCell({
       title: gettext('Phone ICCID')
-    , value: function(device) {
+      , value: function (device) {
         return device.phone ? device.phone.iccid : ''
       }
     })
-  , batteryHealth: TextCell({
+    , batteryHealth: TextCell({
       title: gettext('Battery Health')
-    , value: function(device) {
+      , value: function (device) {
         return device.battery
           ? $filter('translate')(device.enhancedBatteryHealth)
           : ''
       }
     })
-  , batterySource: TextCell({
+    , batterySource: TextCell({
       title: gettext('Battery Source')
-    , value: function(device) {
+      , value: function (device) {
         return device.battery
           ? $filter('translate')(device.enhancedBatterySource)
           : ''
       }
     })
-  , batteryStatus: TextCell({
+    , batteryStatus: TextCell({
       title: gettext('Battery Status')
-    , value: function(device) {
+      , value: function (device) {
         return device.battery
           ? $filter('translate')(device.enhancedBatteryStatus)
           : ''
       }
     })
-  , batteryLevel: TextCell({
+    , batteryLevel: TextCell({
       title: gettext('Battery Level')
-    , value: function(device) {
+      , value: function (device) {
         return device.battery
           ? Math.floor(device.battery.level / device.battery.scale * 100) + '%'
           : ''
       }
-    , compare: function(deviceA, deviceB) {
+      , compare: function (deviceA, deviceB) {
         var va = deviceA.battery ? deviceA.battery.level : 0
         var vb = deviceB.battery ? deviceB.battery.level : 0
         return va - vb
       }
     })
-  , batteryTemp: TextCell({
+    , batteryTemp: TextCell({
       title: gettext('Battery Temp')
-    , value: function(device) {
+      , value: function (device) {
         return device.battery ? device.battery.temp + '°C' : ''
       }
-    , compare: function(deviceA, deviceB) {
+      , compare: function (deviceA, deviceB) {
         var va = deviceA.battery ? deviceA.battery.temp : 0
         var vb = deviceB.battery ? deviceB.battery.temp : 0
         return va - vb
       }
     })
-  , provider: TextCell({
+    , provider: TextCell({
       title: gettext('Location')
-    , value: function(device) {
+      , value: function (device) {
         return device.provider ? device.provider.name : ''
       }
     })
-  , notes: DeviceNoteCell({
+    , notes: DeviceNoteCell({
       title: gettext('Notes')
-    , value: function(device) {
+      , value: function (device) {
         return device.notes || ''
       }
     })
-  , owner: LinkCell({
+    , token: TextCell({
+      title: gettext('Token')
+      , value: function (device) {
+        return device.token || ''
+      }
+    })
+    , owner: LinkCell({
       title: gettext('User')
-    , target: '_blank'
-    , value: function(device) {
+      , target: '_blank'
+      , value: function (device) {
         return device.owner ? device.owner.name : ''
       }
-    , link: function(device) {
+      , link: function (device) {
         return device.owner ? device.enhancedUserProfileUrl : ''
       }
     })
