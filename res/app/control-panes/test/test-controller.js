@@ -2,9 +2,17 @@ module.exports = function testCtrl($scope,$http) {
   $scope.testImg = '';
   var crop = document.getElementById('crop');
   $scope.getFile = function (){
-    $scope.control.getAppUI().then(function(data) {
+    $http.get('/s/download/debug/703/'+$scope.device.serial+'/appui')
+      .success(function(data){
+        genData(data);
+      })
+   /* $scope.control.getAppUI().then(function(data) {
+      genData(data)
+    })*/
+
+    function genData(data){
       console.log(data)
-      crop.src = 'data:image/png;base64,' + data.body.img;
+      crop.src = 'data:image/png;base64,' + data.data.img;
 
       var url = 'http://localhost:7100/s/upload/debug/703/'+$scope.device.serial+'/';
       crop.onload = function () {
@@ -64,6 +72,7 @@ if __name__ == '__main__':\r\n\
         var img=dataURLtoBlob(canvas.toDataURL('image/jpeg', 1))
         formData.append('test.py',txt)
         formData.append('test.jpg',img)
+        formData.append('env',JSON.stringify([{env1:'1'},{env2:'2'}]))
         $http({
           method: 'POST',
           url: url,
@@ -71,10 +80,31 @@ if __name__ == '__main__':\r\n\
           headers: {'Content-Type': undefined},//undefined
           transformRequest: angular.identity
         }).success(function (res) {
-          console.log(res)
+          var ws = new WebSocket($scope.device.msgWSUrl)
+          ws.binaryType = 'blob'
+
+          ws.onerror = function errorListener() {
+            // @todo Handle
+          }
+
+          ws.onclose = function closeListener() {
+            // @todo Maybe handle
+          }
+
+          ws.onopen = function openListener() {
+            var data={
+              type:'debug',
+              data:'703'
+            }
+            ws.send(JSON.stringify(data));
+            console.log('send debug')
+          }
+          ws.onmessage = function(message) {
+            console.log(message.data)
+          }
         })
       }
-    })
+    }
 
     function subnailImage(source,type) {
       var width = source.width;
@@ -126,31 +156,18 @@ if __name__ == '__main__':\r\n\
   }
 
   $scope.scriptDebug = function(){
-    $scope.control.scriptDebug('703');
+    //$scope.control.scriptDebug('703');
+
   }
 
   /*websocket*/
   $scope.$on('msgWS',function(){
     console.log($scope.device.msgWSUrl)
-    var ws = new WebSocket($scope.device.msgWSUrl)
-    ws.binaryType = 'blob'
 
-    ws.onerror = function errorListener() {
-      // @todo Handle
-    }
-
-    ws.onclose = function closeListener() {
-      // @todo Maybe handle
-    }
-
-    ws.onopen = function openListener() {
-      ws.send('appui');
-      console.log('send appui')
-    }
-    ws.onmessage = function(message) {
-      console.log(message.data)
-    }
   })
+
+  //脚本调试最终生成的截图请求:get /s/download/debug/:user/:serial/capture
+  //脚本调试时,获取image和xml,appui get /s/download/debug/:user/:serial/appui
 
   
 }
