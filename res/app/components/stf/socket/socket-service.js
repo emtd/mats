@@ -7,6 +7,8 @@ module.exports = function SocketFactory(
 ) {
   var websocketUrl = AppState.config.websocketUrl || ''
 
+  console.log('wsURL:'+ websocketUrl)
+
   var socket = io(websocketUrl, {
     reconnection: false, transports: ['websocket']
   })

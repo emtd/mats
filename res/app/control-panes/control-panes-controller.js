@@ -3,6 +3,8 @@ module.exports =
     $timeout, $location, DeviceService, GroupService, ControlService,
     StorageService, FatalMessageService, SettingsService) {
 
+    $scope.msgWS = null;
+
     var sharedTabs = [
       {
         title: gettext('Screenshots'),
