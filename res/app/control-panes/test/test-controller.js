@@ -214,7 +214,11 @@ if __name__ == '__main__':\r\n\
     }
 
     $scope.msgWS.on('debug.log', function (data) {
-      console.log(data)
+      //console.log(data)
+    })
+
+    $scope.msgWS.on('debug.stop.return', function (data) {
+      console.log('debug.stop.return',data)
     })
 
     $scope.msgWS.on('debug.start.return', function (data) {
@@ -269,8 +273,9 @@ class CaculatorTests(unittest.TestCase):\r\n\
 if __name__ == '__main__':\r\n\
     suite = unittest.TestLoader().loadTestsFromTestCase(CaculatorTests)\r\n\
     unittest.TextTestRunner(verbosity=2).run(suite)\r\n"
-        console.log(scontent)
-        $scope.msgWS.emit('debug.start',{img:[{name:'test.jpg',data:crop.src.replace(/^data:image\/(jpeg|png|gif);base64,/,'')}],script:{name:'test.py',data:scontent},env:{env1:'a',env2:'b'}});
+        //console.log(scontent)
+        var imgdata=crop.src;
+        $scope.msgWS.emit('debug.start',{img:[{name:'test.png',data:imgdata.replace(/^data:image\/\w+;base64,/,"")}],script:{name:'test.py',data:scontent},env:{env1:'a',env2:'b'}});
 
         /*function dataURLtoBlob(dataurl) {
           var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
