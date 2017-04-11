@@ -217,6 +217,10 @@ if __name__ == '__main__':\r\n\
       console.log(data)
     })
 
+    $scope.msgWS.on('debug.start.return', function (data) {
+      console.log(data)
+    })
+
     function genData(data){
       console.log(data)
       crop.src = 'data:image/png;base64,' + data.img;
@@ -266,7 +270,7 @@ if __name__ == '__main__':\r\n\
     suite = unittest.TestLoader().loadTestsFromTestCase(CaculatorTests)\r\n\
     unittest.TextTestRunner(verbosity=2).run(suite)\r\n"
         console.log(scontent)
-        $scope.msgWS.emit('debug.start',{img:{name:'test.jpg',data:crop.src.replace(/^data:image\/(jpeg|png|gif);base64,/,'')},script:{name:'test.py',data:scontent},env:{env1:'a',env2:'b'}});
+        $scope.msgWS.emit('debug.start',{img:[{name:'test.jpg',data:crop.src.replace(/^data:image\/(jpeg|png|gif);base64,/,'')}],script:{name:'test.py',data:scontent},env:{env1:'a',env2:'b'}});
 
         /*function dataURLtoBlob(dataurl) {
           var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
