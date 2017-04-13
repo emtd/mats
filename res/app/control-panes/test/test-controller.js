@@ -238,6 +238,34 @@ if __name__ == '__main__':\r\n\
         canvas.width = crop.width;
         console.log(canvas.height, canvas.width);
         ctx.drawImage(crop, 0, 0);
+        var img=subnailImage(crop,'jpeg')
+
+        function subnailImage(source,type) {
+          var width = source.width;
+          var height = source.height;
+          var canvas = document.createElement('canvas');
+          var context = canvas.getContext('2d');
+
+          // draw image params
+          var sx = 0;
+          var sy = 0;
+          var sWidth = width;
+          var sHeight = height;
+          var dx = 0;
+          var dy = 0;
+          var dWidth = width*2;
+          var dHeight = height*2;
+          var quality = 1;
+
+          canvas.width = width;
+          canvas.height = height;
+
+          context.drawImage(source, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+
+          var dataUrl = canvas.toDataURL('image/'+type, quality);
+          return dataUrl;
+        }
+
         //var formData = new FormData();
         var scontent = "# coding=utf-8\r\n\
 import unittest\r\n\
@@ -248,6 +276,7 @@ from selenium.common.exceptions import WebDriverException\r\n\
 from selenium.common.exceptions import NoSuchElementException\r\n\
 import sys\r\n\
 import os\r\n\
+#import image_process as ip\
 \
 class CaculatorTests(unittest.TestCase):\r\n\
     def setUp(self):\r\n\
@@ -260,22 +289,23 @@ class CaculatorTests(unittest.TestCase):\r\n\
         desired_caps['udid'] = os.environ['UDID']\r\n\
         self.driver = webdriver.Remote('http://localhost:'+os.environ['APPIUMPORT']+'/wd/hub', desired_caps)\r\n\
 \
-    def test_add_function(self):\r\n\
-        self.driver.implicitly_wait(10)\r\n\
-        time.sleep(2)\r\n\
-        print('Have enter')\r\n\
-        time.sleep(5)\r\n\
-        self.driver.back()\r\n\
-        time.sleep(2)\r\n\
-        self.driver.back()\r\n\
-        self.driver.back()\r\n\
+    #print ip.tap_element_by_image(driver, 'button.jpg')\
+    #def test_add_function(self):\r\n\
+        #self.driver.implicitly_wait(10)\r\n\
+        #time.sleep(2)\r\n\
+        #print('Have enter')\r\n\
+        #time.sleep(5)\r\n\
+        #self.driver.back()\r\n\
+        #time.sleep(2)\r\n\
+        #self.driver.back()\r\n\
+        #self.driver.back()\r\n\
 \
-if __name__ == '__main__':\r\n\
-    suite = unittest.TestLoader().loadTestsFromTestCase(CaculatorTests)\r\n\
-    unittest.TextTestRunner(verbosity=2).run(suite)\r\n"
+#if __name__ == '__main__':\r\n\
+    #suite = unittest.TestLoader().loadTestsFromTestCase(CaculatorTests)\r\n\
+    #unittest.TextTestRunner(verbosity=2).run(suite)\r\n"
         //console.log(scontent)
         var imgdata=crop.src;
-        $scope.msgWS.emit('debug.start',{img:[{name:'test.png',data:imgdata.replace(/^data:image\/\w+;base64,/,"")}],script:{name:'test.py',data:scontent},env:{env1:'a',env2:'b'}});
+        $scope.msgWS.emit('debug.start',{img:[{name:'test.jpg',data:img.replace(/^data:image\/\w+;base64,/,"")}],script:{name:'test.py',data:scontent},env:{env1:'a',env2:'b'}});
 
         /*function dataURLtoBlob(dataurl) {
           var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
