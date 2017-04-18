@@ -267,6 +267,7 @@ if __name__ == '__main__':\r\n\
         }
 
         //var formData = new FormData();
+
         var scontent = "# coding=utf-8\r\n\
 import unittest\r\n\
 import time\r\n\
@@ -279,26 +280,20 @@ import os\r\n\
 #import image_process as ip\
 \
 class CaculatorTests(unittest.TestCase):\r\n\
-    def setUp(self):\r\n\
-        desired_caps = {}\r\n\
-        desired_caps['platformName'] = 'Android'\r\n\
-        desired_caps['platformVersion'] = os.environ['VERSION']\r\n\
-        desired_caps['deviceName'] = 'ZTE BV0720'\r\n\
-        desired_caps['appPackage'] = 'com.cmcc.wallet'\r\n\
-        desired_caps['appActivity'] = 'com.cmcc.wallet.LoadingActivity'\r\n\
-        desired_caps['udid'] = os.environ['UDID']\r\n\
-        self.driver = webdriver.Remote('http://localhost:'+os.environ['APPIUMPORT']+'/wd/hub', desired_caps)\r\n\
+desired_caps = {}\r\n\
+desired_caps['platformName'] = 'Android'\r\n\
+desired_caps['platformVersion'] = os.environ['VERSION']\r\n\
+desired_caps['deviceName'] = 'ZTE BV0720'\r\n\
+desired_caps['appPackage'] = 'com.cmcc.wallet'\r\n\
+desired_caps['appActivity'] = 'com.cmcc.wallet.LoadingActivity'\r\n\
+desired_caps['udid'] = os.environ['UDID']\r\n\
+self.driver = webdriver.Remote('http://localhost:'+os.environ['APPIUMPORT']+'/wd/hub', desired_caps)\r\n\
 \
-    #print ip.tap_element_by_image(driver, 'button.jpg')\
-    #def test_add_function(self):\r\n\
-        #self.driver.implicitly_wait(10)\r\n\
-        #time.sleep(2)\r\n\
-        #print('Have enter')\r\n\
-        #time.sleep(5)\r\n\
-        #self.driver.back()\r\n\
-        #time.sleep(2)\r\n\
-        #self.driver.back()\r\n\
-        #self.driver.back()\r\n\
+time.sleep(2)\r\n\
+print('Have enter')\r\n\
+time.sleep(5)\r\n\
+print('Have enter')\r\n\
+time.sleep(2)\r\n\
 \
 #if __name__ == '__main__':\r\n\
     #suite = unittest.TestLoader().loadTestsFromTestCase(CaculatorTests)\r\n\
