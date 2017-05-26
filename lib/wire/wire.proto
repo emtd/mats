@@ -204,6 +204,7 @@ enum DeviceStatus {
   OFFLINE = 1;
   UNAUTHORIZED = 2;
   ONLINE = 3;
+  NOPERMISSIONS=4;
 }
 
 message DeviceStatusMessage {
