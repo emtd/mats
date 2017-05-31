@@ -26,5 +26,5 @@ if __name__ == '__main__':
     if(fn3 is not None):
         arr=fn3.split(',')
         if(len(arr)==4):
-            region=ip.region(int(arr[0]),int(arr[1]),int(arr[2]),int(arr[3]))
+            region=ip.region(int(float(arr[0])),int(float(arr[1])),int(float(arr[2])),int(float(arr[3])))
     print((ip.get_feature_number_by_image(fn1,fn2,region)).replace(' ', ''))
