@@ -94,7 +94,8 @@
     "ws": "^1.0.1",
     "yargs": "^6.6.0",
     "zmq": "^2.14.0",
-    "appium": "^1.6.3"
+    "appium": "^1.6.3",
+    "images":"^3.0.0"
   },
   "devDependencies": {
     "async": "^2.0.1",

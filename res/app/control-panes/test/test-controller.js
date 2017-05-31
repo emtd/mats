@@ -213,6 +213,10 @@ if __name__ == '__main__':\r\n\
       $scope.msgWS.emit('debug.stop');
     }
 
+    $scope.getAppUIEnd = function () {
+      $scope.msgWS.emit('screenshot.end');
+    }
+
     $scope.msgWS.on('debug.log', function (data) {
       //console.log(data)
     })
@@ -222,6 +226,11 @@ if __name__ == '__main__':\r\n\
     })
 
     $scope.msgWS.on('debug.start.return', function (data) {
+      console.log(data)
+    })
+
+    $scope.msgWS.on('image.match.return', function (data) {
+      console.log('image.match.return')
       console.log(data)
     })
 
@@ -238,7 +247,13 @@ if __name__ == '__main__':\r\n\
         canvas.width = crop.width;
         console.log(canvas.height, canvas.width);
         ctx.drawImage(crop, 0, 0);
-        var img=subnailImage(crop,'jpeg')
+        var img=subnailImage(crop,'png')
+        // window.setTimeout(function(){
+        //   console.error('请求回来好几次了呢！！！！')
+        //   crop.src = img;
+        // },2000)
+        console.error('请求回来好几次了呢！！！！')
+
 
         function subnailImage(source,type) {
           var width = source.width;
@@ -300,7 +315,13 @@ time.sleep(2)\r\n\
     #unittest.TextTestRunner(verbosity=2).run(suite)\r\n"
         //console.log(scontent)
         var imgdata=crop.src;
-        $scope.msgWS.emit('debug.start',{img:[{name:'test.jpg',data:img.replace(/^data:image\/\w+;base64,/,"")}],script:{name:'test.py',data:scontent},env:{env1:'a',env2:'b'}});
+
+        //$scope.msgWS.emit('debug.start',{img:[{name:'test.jpg',data:img.replace(/^data:image\/\w+;base64,/,"")}],script:{name:'test.py',data:scontent},env:{env1:'a',env2:'b'}});
+        $scope.msgWS.emit('image.match',{
+          name:'test.png',
+          data:img,
+          region:null
+        });
 
         /*function dataURLtoBlob(dataurl) {
           var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
@@ -352,6 +373,6 @@ time.sleep(2)\r\n\
   //脚本调试最终生成的截图请求:get /s/download/debug/:user/:serial/capture
   //脚本调试时,获取image和xml,appui get /s/download/debug/:user/:serial/appui
 
-  
+
 }
 
