@@ -85,6 +85,10 @@ enum MessageType {
   ScriptAutoEndMessage=204;
   DeviceAppUIGetMessage=205;
   ScriptDebugMessage=206;
+  PerKeyPointMessage=207;
+}
+
+message PerKeyPointMessage{
 }
 
 message ScriptDebugMessage{

@@ -166,6 +166,12 @@ if __name__ == '__main__':\r\n\
 
   }
 
+  $scope.keyPoint = function (){
+    $scope.control.keyPoint().then(function(data){
+      console.log('keyPoint')
+    });
+  }
+
   /*websocket*/
   $scope.$on('msgWS',function() {
     console.log($scope.device.msgWSUrl)

@@ -249,10 +249,14 @@ module.exports = function ControlServiceFactory(
       })
     }
 
+    this.keyPoint = function(dir,timeDir) {
+      return sendTwoWay('check.point')
+    }
+
     this.getAppUI = function(){
       return sendTwoWay('fs.appui')
     }
-    
+
     this.resScreen = function(flag){
       return sendOneWay('screen.response',{
           sync:flag
