@@ -33,13 +33,15 @@ GetPerformanceCommand = (function(superClass) {
   RE_COLSEP=/\ +/g;
 
   GetPerformanceCommand.prototype.execute = function(packageName) {
-
+    console.log('adbkit------------',packageName)
     var comStr='shell:top -m 1 -n 1 -d 1';
     comStr+=' && cat /proc/meminfo';
     comStr+=' && cat /proc/net/xt_qtaguid/stats'
     comStr+=' && dumpsys battery'
     comStr+=' && dumpsys window|grep mCurrentFocus'
-    comStr+=' && dumpsys gfxinfo '+packageName
+    if(packageName!=''){
+      comStr+=' && dumpsys gfxinfo '+packageName
+    }
     this._send(comStr);
     return this.parser.readAscii(4).then((function(_this) {
       return function(reply) {
@@ -115,10 +117,11 @@ GetPerformanceCommand = (function(superClass) {
 
     //frame
     var dataIndex=value.indexOf('Profile data in ms:');
+    //console.log('-------profile data in ms:',dataIndex)
     if(dataIndex==-1){
       this.stats.frame=0;
       //console.log('no frame message!\r\nplease sure the app is install in device and open app package and move on screen!');
-      return;
+      return this.stats;
     }
     var profileData=value.substring(dataIndex+'Profile data in ms:'.length+1)
     //console.log(profileData)
@@ -154,7 +157,7 @@ GetPerformanceCommand = (function(superClass) {
     })
     var fps=parseInt(frameCount*60/(frameCount+jankFrame))
     this.stats.frame=fps
-    //console.log(this.stats)
+    //console.log('----this.stats:',this.stats)
     return this.stats;
   };
 
