@@ -434,7 +434,7 @@ message LogcatStartMessage {
   required string datePath=2;
   required string logName=3;
   required string performanceName=4;
-  required string packageName=5;
+  optional string packageName=5;
 }
 
 message LogcatStopMessage {
