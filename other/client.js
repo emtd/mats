@@ -409,9 +409,9 @@ Client = (function() {
     }).nodeify(callback);
   };
 //lgl
-  Client.prototype.openPerformanceInfo=function(serial, callback){
+  Client.prototype.openPerformanceInfo=function(serial,packageName, callback){
     return this.transport(serial).then(function(transport) {
-      return new PerformanceInfo(transport).execute();
+      return new PerformanceInfo(transport).execute(packageName);
     }).nodeify(callback);
   }
 

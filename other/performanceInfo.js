@@ -29,15 +29,17 @@ GetPerformanceCommand = (function(superClass) {
   RE_BATTERY = /^  (temperature|level|scale).*$/mg;
   RE_MEMLINE = /^Mem[T|F].*$/mg;
   RE_FLOWLINE = /^[0-9]+.*$/mg;
-
+  RE_CURACTIVE = /^  mCurrentFocus=Window{.*$/mg;
   RE_COLSEP=/\ +/g;
 
-  GetPerformanceCommand.prototype.execute = function() {
+  GetPerformanceCommand.prototype.execute = function(packageName) {
 
     var comStr='shell:top -m 1 -n 1 -d 1';
     comStr+=' && cat /proc/meminfo';
     comStr+=' && cat /proc/net/xt_qtaguid/stats'
     comStr+=' && dumpsys battery'
+    comStr+=' && dumpsys window|grep mCurrentFocus'
+    comStr+=' && dumpsys gfxinfo '+packageName
     this._send(comStr);
     return this.parser.readAscii(4).then((function(_this) {
       return function(reply) {
@@ -56,10 +58,11 @@ GetPerformanceCommand = (function(superClass) {
   };
 
   GetPerformanceCommand.prototype._parse = function(value) {
+    //console.log('------------------adbkit performanceInfo-------------------')
     this.stats.time=new Date().getTime();
     var battery, match,cols,line,type,flowup=0,flowdown=0;
     //cpu
-    var cpus={};//console.log(value)
+    var cpus={};
     while (match = RE_CPULINE.exec(value)) {
       line = match[0];
       cols = line.split(',');
@@ -102,7 +105,56 @@ GetPerformanceCommand = (function(superClass) {
       this.stats.batterys[type]=cols[2];
     }
 
+    //active
+    while (match = RE_CURACTIVE.exec(value)) {
+      line=match[0]
+      var i=line.indexOf('/');
+      var activeStr=line.substring(line.indexOf('/')+1,line.indexOf('}'))
+      this.stats.active=activeStr;
+    }
 
+    //frame
+    var dataIndex=value.indexOf('Profile data in ms:');
+    if(dataIndex==-1){
+      this.stats.frame=0;
+      //console.log('no frame message!\r\nplease sure the app is install in device and open app package and move on screen!');
+      return;
+    }
+    var profileData=value.substring(dataIndex+'Profile data in ms:'.length+1)
+    //console.log(profileData)
+    var list=profileData.split('\r\n');
+    //var jank_count=0;掉帧
+    var frameTime=16.66667
+    var jankFrame=0;
+    var frameCount=0
+    list.forEach(function(item){
+      if(item!=''){
+        var nlist=item.split('\t')
+        var temp=nlist[0]!=''?nlist[0]:nlist[1]
+        if(isNaN(Number(temp))){
+          return;
+        }
+        frameCount++;
+        var time=0;
+        nlist.forEach(function(i){
+          time+=Number(i);
+        })
+        /*if(time>frameTime){//掉帧的情况
+         jank_count++;
+         }*/
+        if(time>frameTime){
+          if(time%frameTime==0){
+            jankFrame+=parseInt(time%frameTime)-1
+          }else{
+            jankFrame+=parseInt(time%frameTime)
+          }
+        }
+
+      }
+    })
+    var fps=parseInt(frameCount*60/(frameCount+jankFrame))
+    this.stats.frame=fps
+    //console.log(this.stats)
     return this.stats;
   };
 

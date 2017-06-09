@@ -193,7 +193,8 @@ module.exports = function ControlServiceFactory(
         filters: filters,
         datePath: ''+ time.getFullYear()+((time.getMonth()+1)<10?'0'+(time.getMonth()+1):(time.getMonth()+1))+(time.getDate()<10?'0'+time.getDate():time.getDate()),
         logName:Date.now()+'_tasklogs.json',
-        performanceName:Date.now()+'_taskperformances.json'
+        performanceName:Date.now()+'_taskperformances.json',
+        packageName:'com.cmcc.wallet'
       })
     }
 
