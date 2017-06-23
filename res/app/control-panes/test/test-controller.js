@@ -289,7 +289,85 @@ if __name__ == '__main__':\r\n\
 
         //var formData = new FormData();
 
-        var scontent = "# coding=utf-8\r\n\
+        var scontent=`#coding=utf-8
+import unittest
+import time
+from appium import webdriver
+from appium.webdriver.common.touch_action import TouchAction
+from selenium.common.exceptions import WebDriverException
+from selenium.common.exceptions import NoSuchElementException
+import sys
+import os
+# from selenium import webdriver
+from selenium.webdriver import Chrome
+from selenium.webdriver.chrome.options import Options
+
+class Browser(unittest.TestCase):
+    def setUp(self):
+        desired_caps = {}
+        desired_caps['platformName'] = 'Android'
+        desired_caps['deviceName'] = 'DEVNAME'
+        # desired_caps['appPackage'] = 'com.android.chrome'
+        # desired_caps['appActivity'] = '.org.chromium.chrome.browser.document.DocumentActivity'
+        desired_caps['browserName']='Chrome'
+        desired_caps['platformVersion'] = os.environ['VERSION']
+        desired_caps['udid'] = os.environ['UDID']##'RO5PBM5LQWJZDQCM'
+        self.driver = webdriver.Remote('http://localhost:' + os.environ['APPIUMPORT'] + '/wd/hub', desired_caps)
+
+    def test_add_function(self):
+        self.driver.implicitly_wait(2)
+        self.driver.get('http://www.baidu.com')
+        time.sleep(2)
+        # self.driver.press_keycode(169)
+        # self.driver.zoom(None, 100,2)
+        try:
+            self.driver.find_element_by_xpath('//*[@id="logo"]/img').is_displayed()
+            print('进入百度页面成功')
+        except NoSuchElementException:
+            print('进入百度页面失败')
+            #assert 1==0
+        self.driver.find_element_by_xpath('//*[@id="login"]').click()
+        time.sleep(2)
+        self.driver.find_element_by_xpath('//*[@id="page-bd"]/section[1]/div[2]/a').click()
+        time.sleep(2)
+        account=self.driver.find_element_by_xpath('//*[@id="login-username"]')
+        account.send_keys('15295432710')
+        time.sleep(2)
+        password=self.driver.find_element_by_xpath('//*[@id="login-password"]')
+        password.send_keys('jyj941223')
+        time.sleep(2)
+        self.driver.find_element_by_xpath('//*[@id="login-formWrapper"]/p[5]').click()
+        time.sleep(2)
+        try:
+            self.driver.find_element_by_xpath('//*[@id="page-bd"]/section[1]/div[2]').is_displayed()
+            print('登录成功')
+        except NoSuchElementException:
+            print('登录失败')
+        time.sleep(2)
+        self.driver.back()
+        time.sleep(2)
+        self.driver.back()
+        time.sleep(2)
+        comment=self.driver.find_element_by_xpath('//*[@id="index-kw"]')
+        comment.send_keys('淘宝')
+        time.sleep(2)
+        self.driver.find_element_by_xpath('//*[@id="index-bn"]').click()
+        time.sleep(2)
+        try:
+            self.driver.find_element_by_xpath('//*[@id="page"]/div[1]/div/div/div/a[1]').is_displayed()
+            print('搜索淘宝成功')
+        except NoSuchElementException:
+            print('搜索淘宝失败')
+
+if __name__ == '__main__':
+    suite = unittest.TestLoader().loadTestsFromTestCase(Browser)
+    unittest.TextTestRunner(verbosity=2).run(suite)`
+
+
+
+
+
+        /*var scontent = "# coding=utf-8\r\n\
 import unittest\r\n\
 import time\r\n\
 from appium import webdriver\r\n\
@@ -318,7 +396,7 @@ time.sleep(2)\r\n\
 \
 #if __name__ == '__main__':\r\n\
     #suite = unittest.TestLoader().loadTestsFromTestCase(CaculatorTests)\r\n\
-    #unittest.TextTestRunner(verbosity=2).run(suite)\r\n"
+    #unittest.TextTestRunner(verbosity=2).run(suite)\r\n"*/
         //console.log(scontent)
         var imgdata=crop.src;
 
