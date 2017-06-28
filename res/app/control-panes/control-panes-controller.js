@@ -73,6 +73,9 @@ module.exports =
           return GroupService.invite(device)
         })
         .then(function(device) {
+          return DeviceService.get(serial, $scope)
+        })
+        .then(function(device) {
           $scope.device = device
           $scope.$broadcast('msgWS',{});
           $scope.control = ControlService.create(device, device.channel)

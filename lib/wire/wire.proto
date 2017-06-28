@@ -172,6 +172,7 @@ message DeviceLogMessage {
 message ProviderMessage {
   required string channel = 1;
   required string name = 2;
+  required string ip=3;
 }
 
 message DeviceHeartbeatMessage {
@@ -227,7 +228,8 @@ message DeviceDisplayMessage {
   required float density = 8;
   required bool secure = 9;
   required string url = 10;
-  optional float size = 11;
+  required string screenUrl = 11;
+  optional float size = 12;
 }
 
 message DeviceBrowserAppMessage {
@@ -265,6 +267,7 @@ message DeviceIdentityMessage {
   required DevicePhoneMessage phone = 11;
   optional string product = 12;
   required string msgWSUrl=13;
+  required string proxyMsgUrl=14;
 }
 
 message DeviceProperty {

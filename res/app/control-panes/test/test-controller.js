@@ -206,9 +206,11 @@ if __name__ == '__main__':\r\n\
       })
     })
     $scope.getAppUI = function () {
+      console.log('send debug.appui')
       $scope.msgWS.emit('debug.appui');
     }
     $scope.msgWS.on('debug.appui', function (data) {
+      console.log('receive debug.appui')
       genData(data)
     })
     $scope.debugStart = function () {
@@ -399,7 +401,7 @@ time.sleep(2)\r\n\
     #unittest.TextTestRunner(verbosity=2).run(suite)\r\n"*/
         //console.log(scontent)
         var imgdata=crop.src;
-
+console.log('send debug.start')
         $scope.msgWS.emit('debug.start',{img:[{name:'test.jpg',data:img.replace(/^data:image\/\w+;base64,/,"")}],script:{name:'test.py',data:scontent},env:{env1:'a',env2:'b'}});
         /*$scope.msgWS.emit('image.match',{
           name:'test.png',
@@ -456,7 +458,14 @@ time.sleep(2)\r\n\
 
   //脚本调试最终生成的截图请求:get /s/download/debug/:user/:serial/capture
   //脚本调试时,获取image和xml,appui get /s/download/debug/:user/:serial/appui
-
+/*  var socket0 = io('http://192.168.27.65:20000', {
+    reconnection: false, transports: ['websocket']
+  })
+  socket0.on('connect',function(){
+    setInterval(function(){
+      socket0.emit('io','ioie')
+    },1000)
+  })*/
 
 }
 
