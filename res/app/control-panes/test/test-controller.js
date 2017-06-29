@@ -1,6 +1,6 @@
 var io = require('socket.io')
 
-module.exports = function testCtrl($scope,$http,$rootScope) {
+module.exports = function testCtrl($rootScope,$scope,$http,$rootScope) {
   $scope.testImg = '';
   var crop = document.getElementById('crop');
   $scope.getFile = function (){
@@ -175,7 +175,7 @@ if __name__ == '__main__':\r\n\
   /*websocket*/
   $scope.$on('msgWS',function() {
     console.log($scope.device.msgWSUrl)
-    var socket = $scope.msgWS = io($scope.device.msgWSUrl, {
+    var socket = $scope.msgWS = io($rootScope.proxy?$scope.device.proxyMsgUrl:$scope.device.msgUrl, {
       reconnection: false, transports: ['websocket'], user: {email: 703, name: 703}
     })
 

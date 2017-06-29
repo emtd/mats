@@ -1,5 +1,5 @@
 module.exports =
-  function ControlPanesController($scope, $http, gettext, $routeParams,
+  function ControlPanesController($rootScope,$scope, $http, gettext, $routeParams,
     $timeout, $location, DeviceService, GroupService, ControlService,
     StorageService, FatalMessageService, SettingsService) {
 
@@ -65,12 +65,13 @@ module.exports =
 
     $scope.device = null
     $scope.control = null
+    $rootScope.proxy = true;
 
     // TODO: Move this out to Ctrl.resolve
     function getDevice(serial) {
       DeviceService.get(serial, $scope)
         .then(function(device) {
-          return GroupService.invite(device)
+          return GroupService.invite(device,$rootScope.proxy)
         })
         .then(function(device) {
           return DeviceService.get(serial, $scope)

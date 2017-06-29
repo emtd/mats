@@ -3,7 +3,8 @@ var rotator = require('./rotator')
 var ImagePool = require('./imagepool')
 
 module.exports = function DeviceScreenDirective(
-  $document
+  $rootScope
+, $document
 , ScalingService
 , VendorUtil
 , PageVisibilityService
@@ -58,7 +59,7 @@ module.exports = function DeviceScreenDirective(
           catch (err) { /* noop */ }
         }
 
-        var ws = new WebSocket(device.display.url)
+        var ws = new WebSocket($rootScope.proxy?device.display.proxyUrl:device.display.url)
         ws.binaryType = 'blob'
 
         ws.onerror = function errorListener() {

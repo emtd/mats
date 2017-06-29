@@ -8,7 +8,7 @@ module.exports = function GroupServiceFactory(
   var groupService = {
   }
 
-  groupService.invite = function(device) {
+  groupService.invite = function(device,proxy) {
     if (!device.usable) {
       return Promise.reject(new Error('Device is not usable'))
     }
@@ -20,7 +20,7 @@ module.exports = function GroupServiceFactory(
           value: device.serial
         , match: 'exact'
         }
-      }
+      },proxy:proxy
     })
     return tx.promise
       .then(function(result) {

@@ -228,7 +228,7 @@ message DeviceDisplayMessage {
   required float density = 8;
   required bool secure = 9;
   required string url = 10;
-  required string screenUrl = 11;
+  required string proxyUrl = 11;
   optional float size = 12;
 }
 
@@ -266,7 +266,7 @@ message DeviceIdentityMessage {
   required DeviceDisplayMessage display = 9;
   required DevicePhoneMessage phone = 11;
   optional string product = 12;
-  required string msgWSUrl=13;
+  required string msgUrl=13;
   required string proxyMsgUrl=14;
 }
 
