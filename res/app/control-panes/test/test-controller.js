@@ -402,7 +402,7 @@ time.sleep(2)\r\n\
         //console.log(scontent)
         var imgdata=crop.src;
 console.log('send debug.start')
-        $scope.msgWS.emit('debug.start',{img:[{name:'test.jpg',data:img.replace(/^data:image\/\w+;base64,/,"")}],script:{name:'test.py',data:scontent},env:{env1:'a',env2:'b'}});
+        $scope.msgWS.emit('debug.start',{user:'703',img:[{name:'test.jpg',data:img.replace(/^data:image\/\w+;base64,/,"")}],script:{name:'test.py',data:scontent},env:{env1:'a',env2:'b'}});
         /*$scope.msgWS.emit('image.match',{
           name:'test.png',
           data:img,

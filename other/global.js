@@ -35,10 +35,11 @@ module.exports = function() {
   process.env.STF_LOCAL_PROVIDER_MIN_PORT=7400;
   process.env.STF_LOCAL_PROVIDER_MAX_PORT=7800;
 
-  process.env.STF_LOCAL_DISTRIBUT=false;
-  process.env.STF_LOCAL_DEVICE_SERVICE=false;//false为app服务器，true为设备服务器
-  process.env.STF_LOCAL_BIND_DEV_PUB='tcp://127.0.0.1:7114';//10.12.32.201
-  process.env.STF_LOCAL_BIND_DEV_PULL='tcp://127.0.0.1:7116';//10.12.32.201
+  process.env.PROXY_IP='10.12.32.201'
+  process.env.STF_LOCAL_DISTRIBUT=true;
+  process.env.STF_LOCAL_DEVICE_SERVICE=true;//false为app服务器，true为设备服务器
+  process.env.STF_LOCAL_BIND_DEV_PUB='tcp://10.12.32.201:7114';//10.12.32.201
+  process.env.STF_LOCAL_BIND_DEV_PULL='tcp://10.12.32.201:7116';//10.12.32.201
   process.env.STF_LOCAL_PROXY_MIN_PORT=10000;
   process.env.STF_LOCAL_PROXY_MAX_PORT=10500;
   process.env.IPMAP='{"10.12.32.201":"58.215.221.218"}'//端口映射

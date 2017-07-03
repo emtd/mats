@@ -86,6 +86,39 @@ enum MessageType {
   DeviceAppUIGetMessage=205;
   ScriptDebugMessage=206;
   PerKeyPointMessage=207;
+  ScriptStartMessage=208;
+  ScriptExistMessage=209;
+  ScriptResultMessage=210;
+  ScriptCheckMessage=211;
+}
+
+message ScriptResultMessage{
+  required string error=1;
+  required uint32 total=2;
+  required uint32 fail=3;
+  required string tasklogurl=4;
+  required string taskperformanceurl=5;
+  required string images=6;
+  required string serial=7;
+  required string task_id=8;
+  required string device_log=9;
+  required string reportcontent=10;
+}
+
+message ScriptStartMessage{
+  required string env=1;
+  required string scriptPath=2;
+  required string taskId=3;
+}
+
+message ScriptExistMessage{
+  required string serial=1;
+  required string scriptName = 2;
+  required bool exist = 3;
+}
+
+message ScriptCheckMessage{
+  required string scriptName=1;
 }
 
 message PerKeyPointMessage{
@@ -520,6 +553,8 @@ message StoreOpenMessage {
 }
 
 message ScreenCaptureMessage {
+  required string datePath = 1;
+  required string imgName = 2;
 }
 
 message ConnectStartMessage {
