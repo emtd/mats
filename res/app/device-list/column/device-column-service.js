@@ -270,6 +270,12 @@ module.exports = function DeviceColumnService($filter, gettext) {
         return device.token || ''
       }
     })
+    , ip: TextCell({
+      title: gettext('Ip')
+      , value: function (device) {
+        return device.provider.ip || ''
+      }
+    })
     , owner: LinkCell({
       title: gettext('User')
       , target: '_blank'

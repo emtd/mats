@@ -119,6 +119,10 @@ module.exports = function DeviceListCtrl(
       name:'token'
       ,selected:true
     }
+    , {
+      name:'ip'
+      ,selected:true
+    }
   ]
 
   $scope.columns = defaultColumns
