@@ -65,7 +65,7 @@ module.exports =
 
     $scope.device = null
     $scope.control = null
-    $rootScope.proxy = false;
+    $rootScope.proxy = true;//in，false:out
 
     // TODO: Move this out to Ctrl.resolve
     function getDevice(serial) {
