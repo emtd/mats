@@ -228,7 +228,7 @@ module.exports = function ControlServiceFactory(
     }
 
     this.screenshot = function() {
-      return sendTwoWay('screen.capture',{datePath:'20170702',imgName:Date.now().toString()+'.jpg'})
+      return sendTwoWay('screen.capture',{path:'date/serial/screenCapture',imgName:Date.now().toString()+'.jpg'})
     }
 
     this.fsretrieve = function(file) {

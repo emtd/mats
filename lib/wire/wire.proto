@@ -554,7 +554,7 @@ message StoreOpenMessage {
 }
 
 message ScreenCaptureMessage {
-  required string datePath = 1;
+  required string path = 1;
   required string imgName = 2;
 }
 
