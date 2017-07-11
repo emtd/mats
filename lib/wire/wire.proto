@@ -109,6 +109,7 @@ message ScriptStartMessage{
   required string env=1;
   required string scriptPath=2;
   required string taskId=3;
+  required string packageName=4;
 }
 
 message ScriptExistMessage{
@@ -119,6 +120,7 @@ message ScriptExistMessage{
 
 message ScriptCheckMessage{
   required string scriptName=1;
+  required string responseChannel=2;
 }
 
 message PerKeyPointMessage{
@@ -143,7 +145,6 @@ message ScreenResponseMessage{
 message PerformanceEntryMessage{
   required string serial=1;
   optional string data=2;
-  optional string package = 3;
 }
 message FileSystemPullMessage{
   required string dir=1;
