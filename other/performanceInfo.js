@@ -95,10 +95,10 @@ GetPerformanceCommand = (function(superClass) {
       var col5=parseFloat(cols[5])
       var col7=parseFloat(cols[7])
       if(!isNaN(col5)){
-        flowup+=col5;
+        flowdown+=col5;
       }
       if(!isNaN(col7)){
-        flowdown+=col7;
+        flowup+=col7;
       }
     }
     this.stats.flows['flowup'] = flowup;
