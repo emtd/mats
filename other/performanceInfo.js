@@ -92,8 +92,14 @@ GetPerformanceCommand = (function(superClass) {
       line = match[0];
       cols = line.split(RE_COLSEP);
       //type = cols.shift().replace(':','');
-      flowup+=parseFloat(cols[5]);
-      flowdown+=parseFloat(cols[7]);
+      var col5=parseFloat(cols[5])
+      var col7=parseFloat(cols[7])
+      if(!isNaN(col5)){
+        flowup+=col5;
+      }
+      if(!isNaN(col7)){
+        flowdown+=col7;
+      }
     }
     this.stats.flows['flowup'] = flowup;
     this.stats.flows['flowdown'] = flowdown;
