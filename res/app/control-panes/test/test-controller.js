@@ -172,6 +172,10 @@ if __name__ == '__main__':\r\n\
     });
   }
 
+  $scope.debugCapture=function(){
+    $scope.msgWS.emit('debug.capture',{user:'703',img:[]});
+  }
+
   /*websocket*/
   $scope.$on('msgWS',function() {
     console.log($scope.device.msgWSUrl)
@@ -237,9 +241,14 @@ if __name__ == '__main__':\r\n\
       console.log(data)
     })
 
-    $scope.msgWS.on('image.match.return', function (data) {
-      console.log('image.match.return')
-      console.log(data)
+    $scope.msgWS.on('debug.capture.return', function (data) {
+console.log(data)
+    })
+
+    $scope.msgWS.on('socket.ip', function (ip) {
+      $rootScope.$apply(function () {
+        $scope.msgWS.ip = ip
+      })
     })
 
     function genData(data){
